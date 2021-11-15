@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model IEnumerable<CandidatesManager.ViewModels.CandidateHomePageViewModel>;
+
+<h1>Всички кандидати</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8 col-lg-12 mx-auto mt-5">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["NumberSortParam"]">Пореден номер</a></th>
+                        <th scope="col">Име</th>
+                        <th scope="col">Отдел</th>
+                        <th scope="col">Образование</th>
+                        <th scope="col"><a asp-action="Index" asp-route-sortOrder="@ViewData["ScoreSortParam"]">Точки</a></th>
+                        <th scope="col">Дата на раждане</th>
+                        <th scope="col">КОД</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var candidate in Model)
+                    {
+                    <tr>
+                        <td>@candidate.Number</td>
+                        <td>@candidate.FirstName @candidate.MiddleInitial @candidate.LastName</td>
+                        <td>@candidate.Department</td>
+                        <td>@candidate.Education</td>
+                        <td>@candidate.Score</td>
+                        <td>@candidate.Birthdate</td>
+                        <td>@candidate.Code</td>
+                        <td>
+                            <a asp-controller="Candidates" asp-action="Edit" asp-route-id="@candidate.Id">Редактиране</a> |
+                            <a class="text-danger" asp-controller="Candidates" asp-action="Delete" asp-route-id="@candidate.Id">Изтриване</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
